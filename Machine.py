@@ -57,7 +57,7 @@ class World:
                 for j in range(self.sq1):
                     self.add_ground(i, j, self.bioms[self.world_cord[0] + i][self.world_cord[1] + j])
 
-    def draw(self, move=(0, 0), open_some=False):  # Отображение на экране спрайтов
+    def draw(self, there, move=(0, 0), open_some=False):  # Отображение на экране спрайтов
         self.win.fill((0, 0, 0))
         flag = self.check_barrier(move, self.centre)
         sorted_by_priority = list()
@@ -67,7 +67,7 @@ class World:
                 sorted_by_priority.append(self.great_world[i][j])
         self.update_object(move, flag, open_some)  # Обновление оставшихся спрайтов и динамической сетки
         for i in sorted(sorted_by_priority, key=lambda x: self.priority.index(x.name)):
-            i.draw(self.win)  # Показ слайдов земли по приоритетам
+            i.draw(self.win, there)  # Показ слайдов земли по приоритетам
         self.synchronous = self.synchronous + 1 if self.synchronous < 1000000 else 0  # Задел на будущее если будет анимированная земля
 
     def import_textures(self):
@@ -109,8 +109,8 @@ class World:
 
     def update_object(self, move, flag, open_some):
         if flag and not open_some:
-            self.now_dr[0] = self.great_world[0][0].rect[0] + 10
-            self.now_dr[1] = self.great_world[0][0].rect[1] + 10
+            self.now_dr[0] = self.great_world[0][0].rect[0]
+            self.now_dr[1] = self.great_world[0][0].rect[1]
             self.move_scene()
 
     def add_ground(self, i, j, biom):  # Вспомогательная функция для добавления спрайта земля на сетку

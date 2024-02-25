@@ -9,6 +9,7 @@ class Cam(pygame.sprite.Sprite):
         self.normal_fps = 60
         self.speed = 20
         self.const_for_speed = self.normal_fps * self.speed
+        self.i = (0, 0)
 
     def stabilise_speed(self, a):  # стабилизация перемещения камеры
         true_fps = 1000000 // (datetime.now().microsecond - a)
@@ -32,6 +33,8 @@ class Cam(pygame.sprite.Sprite):
                 self.move[1] = 0
             if i.key == pygame.K_a or i.key == pygame.K_d:
                 self.move[0] = 0
+        elif i.type == pygame.MOUSEMOTION:
+            self.i = (i.pos[0], i.pos[1])
 
     def update(self):
         pass

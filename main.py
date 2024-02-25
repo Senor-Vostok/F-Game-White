@@ -33,11 +33,11 @@ open_some = False
 
 while True:
     a = datetime.now().microsecond
-    world.draw(camera.move, open_some)  # Вырисовываем картинку
     for i in pygame.event.get():
         camera.event(i)
         if i.type == pygame.QUIT:
             sys.exit()
+    world.draw(camera.i, camera.move, open_some)  # Вырисовываем картинку
     camera.stabilise_speed(a)  # Стабилизируем камеру
     pygame.draw.circle(win, (255, 255, 0), centre, 5)
     pygame.display.update()
