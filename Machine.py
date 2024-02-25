@@ -73,6 +73,8 @@ class World:
     def import_textures(self):
         self.my_font = pygame.font.SysFont('Futura book C', 30)
 
+        self.select = pygame.image.load('data/ground/ground_select.png').convert_alpha()
+
         # Textures world
         self.land = {'ground': pygame.image.load('data/ground/ground.png').convert_alpha(),
                      'barrier': pygame.image.load('data/ground/barrier.png').convert_alpha()}
@@ -114,6 +116,6 @@ class World:
             self.move_scene()
 
     def add_ground(self, i, j, biom):  # Вспомогательная функция для добавления спрайта земля на сетку
-        sprite = Ground(self.land[biom], (self.now_dr[0] + j * self.gr_main + self.gr_main // 2,
+        sprite = Ground([self.land[biom], self.select], (self.now_dr[0] + j * self.gr_main + self.gr_main // 2,
                                           self.now_dr[1] + i * self.gr_main + self.gr_main // 2), biom)
         self.great_world[i][j] = sprite
