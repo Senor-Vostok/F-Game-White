@@ -21,8 +21,8 @@ time.sleep(1)  # Стабилизатор камеры константный(н
 
 size_world = 20
 gen = Generation(size_world)  # Получаем массив сгенерированной "земли"
-world_pos_x = 10
-world_pos_y = 10
+world_pos_x = size_world // 2
+world_pos_y = size_world // 2
 matr_worls = gen.add_barier(15)
 world = World(win, centre, [world_pos_x, world_pos_y], matr_worls)  # Инициализация мира (его отображение)
 world.create()  # заполнение динамической сетки
