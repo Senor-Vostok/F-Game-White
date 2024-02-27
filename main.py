@@ -19,7 +19,7 @@ win.blit(pygame.image.load('data/loading/logo.png').convert_alpha(), (0, 0))
 pygame.display.update()
 time.sleep(1)  # Стабилизатор камеры константный(не допускать значения степени 3!!!!)
 
-size_world = 20
+size_world = 50
 gen = Generation(size_world)  # Получаем массив сгенерированной "земли"
 world_pos_x = size_world // 2
 world_pos_y = size_world // 2

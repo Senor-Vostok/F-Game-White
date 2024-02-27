@@ -9,7 +9,7 @@ class World:
         self.priority = ['ground', 'barrier']  # Приоритеты текстур
 
         self.bioms = bioms  # Получение данных о матрице мира
-        self.gr_main = 180
+        self.gr_main = 60
         self.sq1 = centre[0] * 2 // self.gr_main + 3 if centre[0] * 2 // self.gr_main % 2 == 0 else centre[0] * 2 // self.gr_main + 2  # Разбиение экрана на секторы, с помощью которых строится динамическая сетка
         self.sq2 = centre[1] * 2 // self.gr_main + 5 if centre[1] * 2 // self.gr_main % 2 == 0 else centre[1] * 2 // self.gr_main + 4
 
