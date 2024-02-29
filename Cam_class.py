@@ -7,7 +7,7 @@ class Cam(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.move = [0, 0]
         self.normal_fps = 60
-        self.speed = 15
+        self.speed = 18  # не ставить связанные со степенью 3 и нечетные числа
         self.const_for_speed = self.normal_fps * self.speed
         self.i = (0, 0)
 
