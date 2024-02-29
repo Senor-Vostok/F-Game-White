@@ -15,7 +15,7 @@ pygame.init()
 win = pygame.display.set_mode((width, height))
 my_font = pygame.font.SysFont('Futura book C', 30)
 
-win.blit(pygame.image.load('data/loading/logo.png').convert_alpha(), (0, 0))
+win.blit(pygame.image.load('data/loading/logo.png').convert_alpha(), (centre[0] - 960, centre[1] - 540))
 pygame.display.update()
 time.sleep(1)  # Стабилизатор камеры константный(не допускать значения степени 3!!!!)
 
@@ -23,7 +23,7 @@ size_world = 50
 gen = Generation(size_world)  # Получаем массив сгенерированной "земли"
 world_pos_x = size_world // 2
 world_pos_y = size_world // 2
-matr_worls = gen.add_barier(15)
+matr_worls = gen.add_barier(20)
 world = World(win, centre, [world_pos_x, world_pos_y], matr_worls)  # Инициализация мира (его отображение)
 world.create()  # заполнение динамической сетки
 
