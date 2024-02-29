@@ -1,12 +1,13 @@
 import pygame
 from Ground_class import Ground
+import Textures
 
 
 class World:
     def __init__(self, win, centre, cord, bioms):
-        self.import_textures()  # Импортируем текстуры
+        self.my_font = pygame.font.SysFont('Futura book C', 30)
 
-        self.priority = ['ground', 'barrier']  # Приоритеты текстур
+        self.priority = Textures.priority  # Приоритеты текстур
 
         self.bioms = bioms  # Получение данных о матрице мира
         self.gr_main = 60
@@ -58,7 +59,6 @@ class World:
                     self.add_ground(i, j, self.bioms[self.world_cord[0] + i][self.world_cord[1] + j])
 
     def draw(self, there, move=(0, 0), open_some=False):  # Отображение на экране спрайтов
-        self.win.fill((0, 0, 0))
         flag = self.check_barrier(move, self.centre)
         sorted_by_priority = list()
         for i in range(len(self.great_world)):
@@ -69,15 +69,6 @@ class World:
         for i in sorted(sorted_by_priority, key=lambda x: self.priority.index(x.name)):
             i.draw(self.win, there)  # Показ слайдов земли по приоритетам
         self.synchronous = self.synchronous + 1 if self.synchronous < 1000000 else 0  # Задел на будущее если будет анимированная земля
-
-    def import_textures(self):
-        self.my_font = pygame.font.SysFont('Futura book C', 30)
-
-        self.select = pygame.image.load('data/ground/ground_select.png').convert_alpha()
-
-        # Textures world
-        self.land = {'ground': pygame.image.load('data/ground/ground.png').convert_alpha(),
-                     'barrier': pygame.image.load('data/ground/barrier.png').convert_alpha()}
 
     def move_scene(self):  # Тут происходит проверка, когда нужно обновлять динамическую сетку
         if max(self.now_dr[0], self.start_dr[0]) - min(self.now_dr[0], self.start_dr[0]) > self.gr_main:
@@ -111,11 +102,11 @@ class World:
 
     def update_object(self, move, flag, open_some):
         if flag and not open_some:
-            self.now_dr[0] = self.great_world[0][0].rect[0]
-            self.now_dr[1] = self.great_world[0][0].rect[1]
+            self.now_dr[0] = self.great_world[0][0].rect[0] + self.great_world[0][0].rect[2] // 2 - self.gr_main // 2
+            self.now_dr[1] = self.great_world[0][0].rect[1] + self.great_world[0][0].rect[3] // 2 - self.gr_main // 2
             self.move_scene()
 
     def add_ground(self, i, j, biom):  # Вспомогательная функция для добавления спрайта земля на сетку
-        sprite = Ground([self.land[biom], self.select], (self.now_dr[0] + j * self.gr_main + self.gr_main // 2,
+        sprite = Ground(Textures.land[biom], (self.now_dr[0] + j * self.gr_main + self.gr_main // 2,
                                           self.now_dr[1] + i * self.gr_main + self.gr_main // 2), biom)
         self.great_world[i][j] = sprite
