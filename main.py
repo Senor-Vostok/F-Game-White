@@ -1,5 +1,7 @@
 import pygame
 from datetime import datetime
+
+import Textures
 from Machine import World
 from Generation import Generation
 from Cam_class import Cam
@@ -11,7 +13,8 @@ height = GetSystemMetrics(1)
 centre = (width // 2, height // 2)
 pygame.init()
 
-win = pygame.display.set_mode((width, height))
+win = pygame.display.set_mode((width, height), pygame.FULLSCREEN, vsync=1)
+pygame.mouse.set_visible(False)
 my_font = pygame.font.SysFont('Futura book C', 30)
 
 win.blit(pygame.image.load('data/loading/logo.png').convert_alpha(), (centre[0] - 960, centre[1] - 540))
@@ -37,6 +40,7 @@ while True:
         camera.event(i)
         if i.type == pygame.QUIT:
             sys.exit()
+    camera.inter()
     world.draw(camera.i, camera.move, open_some)  # Вырисовываем картинку
-    camera.stabilise_speed(a)  # Стабилизируем камеру
+    win.blit(Textures.point, (camera.i[0] - 10, camera.i[1] - 10))
     pygame.display.update()

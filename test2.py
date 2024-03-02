@@ -1,7 +1,8 @@
 import socket
+import sys
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-host = '178.214.248.81'
+host = '26.153.90.162'
 port = 2020
 s.connect((host, port))
 s.send('hello!'.encode())

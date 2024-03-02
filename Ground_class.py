@@ -37,7 +37,7 @@ class Ground(pygame.sprite.Sprite):
             pass  # Обработчик событий можно передавать - there, self.biom, self.rect крч всё что есть в классе
         # P.s. в there храниться x, y и flag(None - просто навелись на клетку, True - нажали, False - отпустили)
         screen.blit(self.image, (self.rect.x, self.rect.y))
-        if self.select:
+        if self.select and self.name != 'barrier':
             screen.blit(self.select_image, (self.rect.x, self.rect.y))
         if self.structure:
             self.structure.draw(screen)
