@@ -18,8 +18,8 @@ class Ground(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=xoy)
         self.select = False
 
-        if name_structure:
-            self.structure = ClassicStructure(Textures.animations_structures[name_structure][0], (self.rect[0], self.rect[1]), name_structure)
+        if name_structure in Textures.animations_structures:
+            self.structure = ClassicStructure(Textures.animations_structures[name_structure][0], (self.rect[0] + self.rect[2] // 2, self.rect[1] + self.rect[3] // 2), name_structure)
         else:
             self.structure = None
 
@@ -34,6 +34,8 @@ class Ground(pygame.sprite.Sprite):
         screen.blit(self.image, (self.rect.x, self.rect.y))
         if self.select:
             screen.blit(self.select_image, (self.rect.x, self.rect.y))
+        if self.structure:
+            self.structure.draw(screen)
 
     def update(self, synchronous, move, y_n):  # synchronous - для синхронизации анимации у разных объектов земли
         if self.animation:
@@ -41,5 +43,7 @@ class Ground(pygame.sprite.Sprite):
             self.self_animation(stadia)
 
         if y_n:
+            if self.structure:
+                self.structure.update(move, y_n)
             self.rect.y += move[1]
             self.rect.x += move[0]

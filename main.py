@@ -19,12 +19,13 @@ win.blit(pygame.image.load('data/loading/logo.png').convert_alpha(), (centre[0] 
 pygame.display.update()
 time.sleep(1)  # Стабилизатор камеры константный(не допускать значения степени 3!!!!)
 
-size_world = 50
+size_world = 200
+barrier = 20
 gen = Generation(size_world)  # Получаем массив сгенерированной "земли"
-world_pos_x = size_world // 2
-world_pos_y = size_world // 2
+world_pos_x = (size_world + barrier) // 2
+world_pos_y = (size_world + barrier) // 2
 gen.generation()
-matr_world = gen.add_barier(20)
+matr_world = gen.add_barier(barrier)
 world = World(win, centre, [world_pos_x, world_pos_y], matr_world)  # Инициализация мира (его отображение)
 world.create()  # заполнение динамической сетки
 

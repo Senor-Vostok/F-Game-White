@@ -5,7 +5,7 @@ from perlin_noise import PerlinNoise
 
 class Generation:
     def __init__(self, massive):
-        self.translate = {0: 'ground', 1: 'stone'}
+        self.translate = {0: 'water', 1: 'sand', 2: 'flower', 3: 'ground', 4: 'stone', 5: 'snow'}
         self.masbiom = [['stone' for _ in range(massive)] for _ in range(massive)]
         self.masive = massive
         self.coord_objects = list()
@@ -22,20 +22,18 @@ class Generation:
         return self.masbiom
 
     def get_key(self, z):
-        if z < -8:
+        if z < -6:
             return 0
-        elif z in range(-8, -6):
-            return 1
         elif z in range(-6, -5):
-            return 0
+            return 1
         elif z in range(-5, -2):
-            return 1
+            return 2
         elif z in range(-2, 2):
-            return 0
+            return 3
         elif z in range(1, 7):
-            return 1
+            return 4
         else:
-            return 0
+            return 5
 
     def generation(self):  # пока отключено
         seed = random.randint(1000, 9000)
