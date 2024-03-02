@@ -97,7 +97,7 @@ class World:
                 res = self.now_dr[0] + j * self.gr_main <= point[0] - 2 * move[0] <= self.now_dr[0] + j * self.gr_main + self.gr_main and \
                       self.now_dr[1] + i * self.gr_main <= point[1] - 2 * move[1] <= self.now_dr[1] + i * self.gr_main + self.gr_main
                 if res:
-                    if self.bioms[self.world_cord[0] + i][self.world_cord[1] + j] == 'barrier':
+                    if self.bioms[self.world_cord[0] + i][self.world_cord[1] + j][0] == 'barrier':
                         return False
         return True
 
@@ -108,6 +108,6 @@ class World:
             self.move_scene()
 
     def add_ground(self, i, j, biom):  # Вспомогательная функция для добавления спрайта земля на сетку
-        sprite = Ground(random.choice(Textures.land[biom]), (self.now_dr[0] + j * self.gr_main + self.gr_main // 2,
-                                          self.now_dr[1] + i * self.gr_main + self.gr_main // 2), biom, biom)
+        sprite = Ground(random.choice(Textures.land[biom[0]]), (self.now_dr[0] + j * self.gr_main + self.gr_main // 2,
+                                      self.now_dr[1] + i * self.gr_main + self.gr_main // 2), biom)
         self.great_world[i][j] = sprite

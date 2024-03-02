@@ -1,4 +1,3 @@
-import time
 import pygame
 from datetime import datetime
 from Machine import World
@@ -17,7 +16,6 @@ my_font = pygame.font.SysFont('Futura book C', 30)
 
 win.blit(pygame.image.load('data/loading/logo.png').convert_alpha(), (centre[0] - 960, centre[1] - 540))
 pygame.display.update()
-time.sleep(1)  # Стабилизатор камеры константный(не допускать значения степени 3!!!!)
 
 size_world = 200
 barrier = 20
@@ -41,5 +39,4 @@ while True:
             sys.exit()
     world.draw(camera.i, camera.move, open_some)  # Вырисовываем картинку
     camera.stabilise_speed(a)  # Стабилизируем камеру
-    pygame.draw.circle(win, (255, 255, 0), centre, 5)
     pygame.display.update()
