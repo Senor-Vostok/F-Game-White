@@ -5,6 +5,8 @@ screen = pygame.display.set_mode()
 
 priority = ['water', 'sand', 'flower', 'ground', 'stone', 'snow', 'barrier']
 
+loading = pygame.image.load('data/loading/logo.png').convert_alpha()
+
 select = pygame.image.load('data/ground/ground_select.png').convert_alpha()
 
 point = pygame.image.load('data/ground/test.png').convert_alpha()

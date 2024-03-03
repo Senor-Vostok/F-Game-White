@@ -18,20 +18,20 @@ class Cam(pygame.sprite.Sprite):
             true_fps = 1000000 // (datetime.now().microsecond - a)
         except Exception:
             true_fps = self.normal_fps
-       # if self.speed != self.const_for_speed // true_fps and true_fps > 0:
-           # self.speed = self.speed if 1.48 <= self.const_for_speed / true_fps <= 1.52 else self.const_for_speed / true_fps
-            #if self.move[0]:
-                #self.move[0] = self.speed * (abs(self.move[0]) // self.move[0])
-            #if self.move[1]:
-               # self.move[1] = self.speed * (abs(self.move[1]) // self.move[1])
+        if self.speed != self.const_for_speed // true_fps and true_fps > 0:
+            self.speed = self.speed if 1.48 <= self.const_for_speed / true_fps <= 1.52 else self.const_for_speed / true_fps
+            if self.move[0]:
+                self.move[0] = self.speed * (abs(self.move[0]) // self.move[0])
+            if self.move[1]:
+                self.move[1] = self.speed * (abs(self.move[1]) // self.move[1])
 
     def inter(self):
         if self.smooth_x:
-            self.move[0] = self.move[0] * 1.1 if abs(self.move[0] * 1.1) < self.speed * 20 else self.move[0]
+            self.move[0] = self.move[0] * 1.1 if abs(self.move[0] * 1.1) < self.speed * 10 else self.move[0]
         else:
             self.move[0] = self.move[0] / 1.03 if abs(self.move[0]) / 1.05 > 1 else 0
         if self.smooth_y:
-            self.move[1] = self.move[1] * 1.1 if abs(self.move[1] * 1.1) < self.speed * 20 else self.move[1]
+            self.move[1] = self.move[1] * 1.1 if abs(self.move[1] * 1.1) < self.speed * 10 else self.move[1]
         else:
             self.move[1] = self.move[1] / 1.03 if abs(self.move[1]) / 1.05 > 1 else 0
 

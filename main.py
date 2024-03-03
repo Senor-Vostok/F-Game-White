@@ -17,12 +17,12 @@ win = pygame.display.set_mode((width, height), pygame.FULLSCREEN, vsync=1)
 pygame.mouse.set_visible(False)
 my_font = pygame.font.SysFont('Futura book C', 30)
 
-win.blit(pygame.image.load('data/loading/logo.png').convert_alpha(), (centre[0] - 960, centre[1] - 540))
+win.blit(Textures.loading, (centre[0] - 960, centre[1] - 540))
 pygame.display.update()
 
-size_world = 200
+size_world = 400
 barrier = 20
-gen = Generation(size_world)  # Получаем массив сгенерированной "земли"
+gen = Generation(size_world, win, centre)  # Получаем массив сгенерированной "земли"
 world_pos_x = (size_world + barrier) // 2
 world_pos_y = (size_world + barrier) // 2
 gen.generation()
