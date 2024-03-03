@@ -36,7 +36,7 @@ open_some = False
 
 while True:
     a = datetime.now().microsecond
-    for i in pygame.event.get():
+    for i in pygame.event.get([pygame.QUIT, pygame.KEYUP, pygame.KEYDOWN, pygame.MOUSEBUTTONUP, pygame.MOUSEBUTTONDOWN, pygame.MOUSEMOTION]):
         camera.event(i)
         if i.type == pygame.QUIT:
             sys.exit()

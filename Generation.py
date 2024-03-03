@@ -11,8 +11,6 @@ class Generation:
         self.translate = {0: 'water', 1: 'sand', 2: 'flower', 3: 'ground', 4: 'stone', 5: 'snow'}
         self.masbiom = [[['\0', '\0'] for _ in range(massive)] for _ in range(massive)]  # Первый биом второй структура
         self.masive = massive
-        self.coord_objects = list()
-        self.select_cord_objects = list()
         self.win = screen
         self.centre = centre
 

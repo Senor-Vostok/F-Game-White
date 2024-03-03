@@ -9,7 +9,7 @@ class Cam(pygame.sprite.Sprite):
         self.normal_fps = 60
         self.speed = 1  # не ставить связанные со степенью 3 и нечетные числа
         self.const_for_speed = self.normal_fps * self.speed
-        self.i = (0, 0)
+        self.i = (0, 0, None, None)
         self.smooth_x = False
         self.smooth_y = False
 
@@ -55,11 +55,11 @@ class Cam(pygame.sprite.Sprite):
             if i.key == pygame.K_a or i.key == pygame.K_d:
                 self.smooth_x = False
         elif i.type == pygame.MOUSEMOTION:
-            self.i = (i.pos[0], i.pos[1], None)
+            self.i = (i.pos[0], i.pos[1], None, None)
         elif i.type == pygame.MOUSEBUTTONDOWN:
-            self.i = (i.pos[0], i.pos[1], True)
+            self.i = (i.pos[0], i.pos[1], True, i.button)
         elif i.type == pygame.MOUSEBUTTONUP:
-            self.i = (i.pos[0], i.pos[1], False)
+            self.i = (i.pos[0], i.pos[1], False, i.button)
 
     def update(self):
         pass

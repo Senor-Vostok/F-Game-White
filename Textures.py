@@ -21,4 +21,4 @@ land = {'ground': [pygame.image.load(f'data/ground/ground{i}.png').convert_alpha
         'sand': [pygame.image.load('data/ground/sand.png').convert_alpha()],
         'snow': [pygame.image.load('data/ground/snow.png').convert_alpha()]}
 
-animations_structures = {'f': [pygame.image.load('data/ground/test.png').convert_alpha()]}
+animations_structures = {'f': [pygame.image.load(f'data/structures/mill/s{i}.png').convert_alpha() for i in range(1, 4)]}

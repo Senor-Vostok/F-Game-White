@@ -33,7 +33,8 @@ class Ground(pygame.sprite.Sprite):
 
     def draw(self, screen, there):
         self.select = self.rect.colliderect(there[0], there[1], 1, 1)
-        if self.select:
+        if self.select and there[2]:
+            self.structure = ClassicStructure(Textures.animations_structures['f'][0], (self.rect[0] + self.rect[2] // 2, self.rect[1] + self.rect[3] // 2), 'f')
             pass  # Обработчик событий можно передавать - there, self.biom, self.rect крч всё что есть в классе
         # P.s. в there храниться x, y и flag(None - просто навелись на клетку, True - нажали, False - отпустили)
         screen.blit(self.image, (self.rect.x, self.rect.y))
