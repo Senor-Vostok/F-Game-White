@@ -1,12 +1,14 @@
 import random
 import pygame
-import Textures
+from Textures import Textures
 from numpy import floor
 from perlin_noise import PerlinNoise
+from functools import cache
 
 
 class Generation:
     def __init__(self, massive, screen, centre):
+        self.textures = Textures()
         self.font = pygame.font.SysFont('Futura book C', 30)
         self.translate = {0: 'water', 1: 'sand', 2: 'flower', 3: 'ground', 4: 'stone', 5: 'snow'}
         self.masbiom = [[['\0', '\0'] for _ in range(massive)] for _ in range(massive)]  # Первый биом второй структура
@@ -37,7 +39,8 @@ class Generation:
             return 4
         return 5
 
-    def generation(self):  # пока отключено
+    @cache
+    def generation(self):
         seed = random.randint(1000, 9000)
         noise = PerlinNoise(octaves=7, seed=seed)
         amp = 14
@@ -49,7 +52,7 @@ class Generation:
                 landscale[int(x)][int(z)] = self.get_key(int(y))
 
             procent = int(((x / self.masive) * 100) // 1)
-            self.win.blit(Textures.loading, (self.centre[0] - 960, self.centre[1] - 540))
+            self.win.blit(self.textures.loading, (self.centre[0] - 960, self.centre[1] - 540))
             self.win.blit(self.font.render(f'{procent}%', False, (99, 73, 47)), (self.centre[0], self.centre[1] + 200))
             pygame.display.update()
 
