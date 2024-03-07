@@ -1,7 +1,7 @@
 import socket
 import select
 
-HOST = '26.39.51.10'
+HOST = 'localhost'
 PORT = 5050
 
 ACK_TEXT = 'text_received'
