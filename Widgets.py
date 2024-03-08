@@ -15,7 +15,7 @@ class Button(pygame.sprite.Sprite):
         self.func = func(**args)
 
     def update(self, there):
-        if self.rect.colliderect(there[0], there[1], 1, 1):
+        if self.rect.colliderect(there[0], there[1], 1, 1) and there[2] and there[3] == 1:
             self.func()
 
 
@@ -46,3 +46,11 @@ class InteractLabel(pygame.sprite.Sprite):
             self.text = self.text[:-1]
         else:
             self.text += str(pygame.key)
+
+
+class Surface:
+    def __init__(self, size, **args):
+        self.surface = pygame.Surface(size)
+        for i in args:
+            self.surface.blit(i, (i.rect.x, i.rect.y))
+
