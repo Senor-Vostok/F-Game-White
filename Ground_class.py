@@ -20,7 +20,7 @@ class Ground(pygame.sprite.Sprite):
         self.select = False
 
         #списки размещаемых структур для каждого биома
-        self.biome_permissions = {'f': ['sand', 'flower']}
+        self.biome_permissions = {'mill': ['sand', 'flower']}
 
         if biom[1] in textures.animations_structures:
             self.structure = ClassicStructure(textures.animations_structures[biom[1]][0], (self.rect[0] + self.rect[2] // 2, self.rect[1] + self.rect[3] // 2), biom[1], self.textures)
@@ -37,7 +37,7 @@ class Ground(pygame.sprite.Sprite):
         screen.blit(self.image, (self.rect.x, self.rect.y))
         self.select = self.rect.colliderect(there[0], there[1], 1, 1)
         if self.select:
-            self.check_event(there, 'f')
+            self.check_event(there, 'mill')
         if self.select and self.name != 'barrier':
             screen.blit(self.select_image, (self.rect.x, self.rect.y))
         if self.structure:

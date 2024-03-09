@@ -101,6 +101,7 @@ class World:
                       self.now_dr[1] + i * self.gr_main <= point[1] - 2 * move[1] <= self.now_dr[1] + i * self.gr_main + self.gr_main
                 if res:
                     if self.bioms[self.world_cord[0] + i][self.world_cord[1] + j][0] == 'barrier':
+                        move[0], move[1] = -move[0], -move[1]
                         return False
         return True
 

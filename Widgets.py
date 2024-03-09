@@ -28,12 +28,17 @@ class InteractLabel(pygame.sprite.Sprite):
         self.text = "_"
         # self.font.render(self.text, False, (99, 73, 47))
         self.rect = self.image.get_rect(center=xoy)
-        self.font = pygame.font.SysFont("Futura book C", self.rect[3] + int(0.2 * self.rect[3]))
+        self.font = pygame.font.SysFont("Futura book C", self.rect[3] + self.rect[3] // 4)
         self.can_write = False
 
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
-        screen.blit(self.font.render(self.text, False, (99, 73, 47)), (self.rect.x + 5, self.rect.y + 10))
+        image = self.font.render(self.text, False, (99, 73, 47))
+        i = 1
+        while image.get_rect()[2] > self.rect[2] - 5:
+            image = self.font.render("." + self.text[i:], False, (99, 73, 47))
+            i += 1
+        screen.blit(image, (self.rect.x + 2, self.rect.y + 2))
 
     def update(self, there, command=None):
         if not self.rect.colliderect(there[0], there[1], 1, 1) and there[2] and there[3] == 1:
