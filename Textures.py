@@ -12,6 +12,8 @@ class Textures:
 
         self.loading = pygame.image.load('data/loading/logo.png').convert_alpha()
 
+        self.label = pygame.image.load('data/ground/label.png').convert_alpha()
+
         self.select = pygame.image.load('data/ground/ground_select.png').convert_alpha()
 
         self.point = pygame.image.load('data/ground/test.png').convert_alpha()

@@ -20,7 +20,7 @@ class Ground(pygame.sprite.Sprite):
         self.select = False
 
         #списки размещаемых структур для каждого биома
-        self.biome_permissions = {'barrier': [], 'water': [], 'sand': ['f'], 'flower': ['f'], 'ground': ['f'], 'stone': [], 'snow': ['f']}
+        self.biome_permissions = {'f': ['sand', 'flower']}
 
         if biom[1] in textures.animations_structures:
             self.structure = ClassicStructure(textures.animations_structures[biom[1]][0], (self.rect[0] + self.rect[2] // 2, self.rect[1] + self.rect[3] // 2), biom[1], self.textures)
@@ -55,7 +55,7 @@ class Ground(pygame.sprite.Sprite):
 
     def check_event(self, event, struct_name):
         if event[2]: #нажали (ТУДУ: добавить проверку на другие действия)
-            if event[3] == 1: #лкм - разместить структуру
+            if event[3] == 1: #лкм - разместить структуруw
                 self.biom[1] = struct_name
                 self.structure = ClassicStructure(self.textures.animations_structures[struct_name][0],
                                                  (self.rect[0] + self.rect[2] // 2, self.rect[1] + self.rect[3] // 2), struct_name, self.textures)
@@ -74,6 +74,6 @@ class Ground(pygame.sprite.Sprite):
                 pass
 
     def draw_structure(self, screen):
-        if self.structure.name in self.biome_permissions[self.name]:
-            self.image = pygame.image.load('data/ground/barrier.png').convert_alpha()
+        if self.biom[1] and self.biom[0] in self.biome_permissions[self.biom[1]]:
+            self.image = self.textures.land['barrier'][0]
             self.structure.draw(screen)
