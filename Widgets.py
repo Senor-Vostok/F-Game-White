@@ -67,3 +67,14 @@ class Surface:
             i.update(there, command)
             i.draw(screen)
 
+
+class Label(pygame.sprite.Sprite.__init__):
+    def __init__(self, text, xoy):
+        pygame.sprite.Sprite.__init__(self)
+        self.text = text
+        self.rect = self.get_rect(center=xoy)
+        self.font = pygame.font.SysFont("Futura book C", self.rect[3] + self.rect[3] // 4)
+        self.label = self.font.render(self.text, 1, (99, 73, 47))
+
+    def draw(self, screen):
+        screen.blit(self.label, (self.rect.x, self.rect.y))
