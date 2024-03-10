@@ -68,7 +68,7 @@ class Surface:
             i.draw(screen)
 
 
-class Label(pygame.sprite.Sprite.__init__):
+class Label(pygame.sprite.Sprite):
     def __init__(self, text, xoy):
         pygame.sprite.Sprite.__init__(self)
         self.text = text
