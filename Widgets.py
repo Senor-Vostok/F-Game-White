@@ -78,3 +78,13 @@ class Label(pygame.sprite.Sprite):
 
     def draw(self, screen):
         screen.blit(self.label, (self.rect.x, self.rect.y))
+
+
+class BackGround(pygame.sprite.Sprite):
+    def __init__(self, image, xoy):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = image
+        self.rect = self.image.get_rect(center=xoy)
+
+    def draw(self, screen):
+        screen.blit(self.image, (self.rect.x, self.rect.y))
