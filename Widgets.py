@@ -57,7 +57,7 @@ class InteractLabel(pygame.sprite.Sprite):
 
 
 class Surface:
-    def __init__(self, size=None, *args):
+    def __init__(self, *args):
         self.widgets = list()
         for i in args:
             self.widgets.append(i)
@@ -69,15 +69,18 @@ class Surface:
 
 
 class Label(pygame.sprite.Sprite):
-    def __init__(self, text, xoy):
+    def __init__(self, text, xoy, size):
         pygame.sprite.Sprite.__init__(self)
         self.text = text
-        self.rect = self.get_rect(center=xoy)
-        self.font = pygame.font.SysFont("Futura book C", self.rect[3] + self.rect[3] // 4)
+        self.font = pygame.font.SysFont("Futura book C", size)
         self.label = self.font.render(self.text, 1, (99, 73, 47))
+        self.rect = self.label.get_rect(center=xoy)
 
     def draw(self, screen):
         screen.blit(self.label, (self.rect.x, self.rect.y))
+
+    def update(self, there, command):
+        pass
 
 
 class BackGround(pygame.sprite.Sprite):
@@ -88,3 +91,6 @@ class BackGround(pygame.sprite.Sprite):
 
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
+
+    def update(self, there, command):
+        pass
