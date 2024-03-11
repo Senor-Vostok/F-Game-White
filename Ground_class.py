@@ -16,6 +16,9 @@ class Ground(pygame.sprite.Sprite):
         self.name = biom[0]
         self.name_struct = biom[1]
 
+        self.units_count = 0
+        self.fraction = None
+
         self.border_fraction = None
 
         self.tile_image = image  # изначальная текстура клетки
