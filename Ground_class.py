@@ -1,4 +1,5 @@
 import pygame
+from Player import Player
 from Structures import ClassicStructure
 import Event
 
@@ -51,7 +52,7 @@ class Ground(pygame.sprite.Sprite):
             screen.blit(self.select_image, (self.rect.x, self.rect.y))
         if self.structure:
             self.draw_structure(screen)
-        #Event.check_event(there, self, screen)
+        Event.check_event(self, there, screen)
 
     def update(self, synchronous, move, y_n):  # synchronous - для синхронизации анимации у разных объектов земли
         if self.animation:

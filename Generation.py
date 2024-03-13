@@ -16,7 +16,7 @@ class Generation:
         self.win = screen
         self.centre = centre
 
-    def add_barier(self, size):
+    def add_barrier(self, size):
         for i in range(self.masive + size * 2):
             if i < size:
                 self.masbiom.insert(0, [['barrier', 'null']] * (self.masive + size * 2))

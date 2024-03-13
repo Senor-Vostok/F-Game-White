@@ -31,7 +31,7 @@ gen = Generation(size_world, win, centre)  # Получаем массив сг�
 world_pos_x = (size_world + barrier) // 2
 world_pos_y = (size_world + barrier) // 2
 gen.generation()
-matr_world = gen.add_barier(barrier)
+matr_world = gen.add_barrier(barrier)
 world = World(win, centre, [world_pos_x, world_pos_y], matr_world)  # Инициализация мира (его отображение)
 world.create()  # заполнение динамической сетки
 
