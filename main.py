@@ -1,6 +1,6 @@
 import pygame
-
 import Player
+import Interfaces
 from Textures import Textures
 from Machine import World
 from Generation import Generation
@@ -18,7 +18,7 @@ pygame.init()
 clock = pygame.time.Clock()
 textures = Textures()
 
-win = pygame.display.set_mode((width, height))
+win = pygame.display.set_mode((width, height), pygame.FULLSCREEN, vsync=1)
 pygame.mouse.set_visible(False)
 my_font = pygame.font.SysFont('Futura book C', 30)
 
