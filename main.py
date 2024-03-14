@@ -23,7 +23,7 @@ class EventHandler:
         pygame.mouse.set_visible(False)
 
         self.matr = None
-        self.world_coord = None
+        self.world_coord = 0
         self.screen_world = None
 
         self.camera = Cam()
@@ -39,11 +39,11 @@ class EventHandler:
         gen = Generation(size, self.screen, self.centre)
         self.world_coord = (size + barrier) // 2
         gen.generation()
-        self.matr = gen.add_barier(barrier)
+        self.matr = gen.add_barrier(barrier)
 
     def player(self, id):
         self.player = Player.Player(id)
-        self.player.start_point = (self.screen_world.sq2 // 2, self.screen_world.sq1 // 2)  # Что за хуйня?
+        self.player.start_point = (self.screen_world.sq2 // 2, self.screen_world.sq1 // 2)
         player.setup(self.screen_world.great_world[self.player.start_point[0]][self.player.start_point[1]])
 
     def init_world(self):
@@ -75,7 +75,7 @@ class EventHandler:
                 c = i
             if i.type == pygame.QUIT:
                 sys.exit()
-        if not self.open_some:
+        if self.screen_world:
             self.machine()
         try:
             for i in self.interfaces:

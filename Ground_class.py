@@ -1,5 +1,4 @@
 import pygame
-from Player import Player
 from Structures import ClassicStructure
 import Event
 

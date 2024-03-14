@@ -59,4 +59,3 @@ class Generation:
             for j in range(self.masive):
                 self.masbiom[i][j][0] = self.translate[landscale[i][j]]
                 self.masbiom[i][j][2] = (i, j)
-        return self.masbiom
