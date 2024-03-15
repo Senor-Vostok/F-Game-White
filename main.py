@@ -59,11 +59,15 @@ class EventHandler:
     def close(self, data=['menu', False, init_world]):
         self.open_some = data[1]
         self.interfaces.pop(data[0])
-        data[2]()
+        if data[2]: data[2]()
+
+    def goodbye(self):
+        sys.exit()
 
     def show_menu(self):
         menu = Interfaces.Menu(self.centre, self.textures)
         menu.button_start.connect(self.close, 'menu', False, self.init_world)
+        menu.button_exit.connect(self.goodbye)
         self.interfaces['menu'] = menu.create_surface()
 
     def update(self):
