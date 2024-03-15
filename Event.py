@@ -37,12 +37,11 @@ def check_event(gr, there, screen):  # event_id - какое действие п
         pass  # убрать интерфейс
     elif there[3] == 3:  # пкм
         if not label_choice:
-            label_choice = PopupMenu((gr.rect[0] + gr.rect[2] // 2, gr.rect[1] + gr.rect[3] // 2))
+            interfaces['popup'] = PopupMenu((gr.rect[0] + gr.rect[2] // 2, gr.rect[1] + gr.rect[3] // 2)).create_surface()
+
         # do_name, *args = Окно из интерфейса
         # запихиваем интерфейс в label_choice
         # checker(do_name, *args)
-    if label_choice:
-        label_choice.display.update(there, screen)
 
 
 # label_choice.update(btn, screen)
