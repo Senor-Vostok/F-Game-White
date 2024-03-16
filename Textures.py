@@ -1,4 +1,5 @@
 import pygame
+from win32api import GetSystemMetrics
 
 pygame.init()
 screen = pygame.display.set_mode()
@@ -6,6 +7,7 @@ screen = pygame.display.set_mode()
 
 class Textures:
     def __init__(self):
+        self.resizer = GetSystemMetrics(0) / 1920
         self.priority = ['water', 'sand', 'flower', 'ground', 'stone', 'snow', 'barrier']
 
         self.font = pygame.font.SysFont('Futura book C', 30)
@@ -47,6 +49,11 @@ class Textures:
                                              self.render(f'data/widgets/menu/buttons/button4t.png', (400, 70))],
                           'button_exit': [self.render(f'data/widgets/menu/buttons/button5.png', (400, 70)),
                                           self.render(f'data/widgets/menu/buttons/button5t.png', (400, 70))]}
+        self.pause = {'background': [self.render(f'data/widgets/menu/labels/background.png', (1920, 1080))],
+                      'button_menu': [self.render(f'data/widgets/menu/buttons/button6.png', (400, 70)),
+                                      self.render(f'data/widgets/menu/buttons/button6t.png', (400, 70))],
+                      'button_setting': self.main_menu['button_setting']}
 
     def render(self, address, size):
+        size = size[0] * self.resizer, size[1] * self.resizer
         return pygame.transform.scale(pygame.image.load(address), size).convert_alpha()

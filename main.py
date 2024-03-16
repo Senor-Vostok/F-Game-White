@@ -17,6 +17,7 @@ class EventHandler:
         pygame.init()
         self.textures = Textures()
         self.size = GetSystemMetrics(0), GetSystemMetrics(1)
+        print(self.size)
         self.centre = (GetSystemMetrics(0) // 2, GetSystemMetrics(1) // 2)
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode(self.size, pygame.FULLSCREEN, vsync=1)
@@ -61,14 +62,21 @@ class EventHandler:
         self.interfaces.pop(data[0])
         if data[2]: data[2]()
 
-    def goodbye(self):
-        sys.exit()
+    def go_back_to_menu(self):
+        self.close(['pause', True, None])
+        self.show_menu()
+        self.screen_world = None
 
     def show_menu(self):
         menu = Interfaces.Menu(self.centre, self.textures)
         menu.button_start.connect(self.close, 'menu', False, self.init_world)
-        menu.button_exit.connect(self.goodbye)
+        menu.button_exit.connect(sys.exit)
         self.interfaces['menu'] = menu.create_surface()
+
+    def show_pause(self):
+        pause = Interfaces.Pause(self.centre, self.textures)
+        pause.button_menu.connect(self.go_back_to_menu)
+        self.interfaces['pause'] = pause.create_surface()
 
     def update(self):
         self.clock.tick()
@@ -77,6 +85,8 @@ class EventHandler:
             self.camera.event(i)
             if i.type == pygame.KEYDOWN:
                 c = i
+                if i.key == pygame.K_ESCAPE and not self.open_some:
+                    self.show_pause() if 'pause' not in self.interfaces else self.close(['pause', False, None])
             if i.type == pygame.QUIT:
                 sys.exit()
         if self.screen_world:
