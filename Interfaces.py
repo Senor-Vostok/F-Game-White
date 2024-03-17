@@ -30,7 +30,12 @@ class Menu:
 
 class PopupMenu:
     def __init__(self, xoy, textures=Textures.Textures()):
-        self.background = BackGround(textures.popup_menu['label'], xoy)
+        r = textures.resizer
+        self.button_information = Button(textures.popup_menu['button_information'], (xoy[0] + 130 * r, xoy[1] - 100 * r))
+        self.button_build = Button(textures.popup_menu['button_build'], (xoy[0] + 130 * r, xoy[1] - 48 * r))
+        self.button_destroy = Button(textures.popup_menu['button_destroy'], (xoy[0] + 130 * r, xoy[1] + 4 * r))
+        self.button_fight = Button(textures.popup_menu['button_fight'], (xoy[0] + 130 * r, xoy[1] + 56 * r))
+        self.button_cancel = Button(textures.popup_menu['button_cancel'], (xoy[0] + 130 * r, xoy[1] + 108 * r))
 
     def create_surface(self):
-        return Surface(self.background)
+        return Surface(self.button_information, self.button_build, self.button_destroy, self.button_fight, self.button_cancel)

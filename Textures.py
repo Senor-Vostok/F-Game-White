@@ -35,7 +35,16 @@ class Textures:
             'mill': [self.render(f'data/structures/mill/anim{i}.png', (120, 180)) for i in range(1, 4)],
             'mine': [self.render(f'data/structures/mine/anim{i}.png', (120, 180)) for i in range(1, 8)]}
 
-        self.popup_menu = {'label': self.render(f'data/widgets/surfaces/surface1.png', (120, 180))}
+        self.popup_menu = {'button_information': [self.render('data/widgets/popupmenu/buttons/button1.png', (250, 50)),
+                                                  self.render('data/widgets/popupmenu/buttons/button1t.png', (250, 50))],
+                           'button_build': [self.render('data/widgets/popupmenu/buttons/button2.png', (250, 50)),
+                                            self.render('data/widgets/popupmenu/buttons/button2t.png', (250, 50))],
+                           'button_destroy': [self.render('data/widgets/popupmenu/buttons/button3.png', (250, 50)),
+                                              self.render('data/widgets/popupmenu/buttons/button3t.png', (250, 50))],
+                           'button_fight': [self.render('data/widgets/popupmenu/buttons/button4.png', (250, 50)),
+                                            self.render('data/widgets/popupmenu/buttons/button4t.png', (250, 50))],
+                           'button_cancel': [self.render('data/widgets/popupmenu/buttons/button5.png', (250, 50)),
+                                             self.render('data/widgets/popupmenu/buttons/button5t.png', (250, 50))]}
 
         self.main_menu = {'background': [self.render(f'data/widgets/menu/background.png', (1920, 1080))],
                           'name': [self.render(f'data/widgets/menu/main element.png', (466, 194))],

@@ -8,6 +8,7 @@ from Cam_class import Cam
 import sys
 import os
 from win32api import GetSystemMetrics
+from Structures import *
 
 import Widgets
 
@@ -17,7 +18,6 @@ class EventHandler:
         pygame.init()
         self.textures = Textures()
         self.size = GetSystemMetrics(0), GetSystemMetrics(1)
-        print(self.size)
         self.centre = (GetSystemMetrics(0) // 2, GetSystemMetrics(1) // 2)
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode(self.size, pygame.FULLSCREEN, vsync=1)
@@ -36,6 +36,12 @@ class EventHandler:
 
         self.interfaces = dict()
 
+    def check_ground_please(self, ground):
+        if self.camera.i[3] == 3:
+            if 'popup_menu' in self.interfaces:
+                self.interfaces.pop('popup_menu')
+            self.show_popup_menu((self.camera.i[0], self.camera.i[1]), ground)
+
     def generation(self, size=200, barrier=20):
         gen = Generation(size, self.screen, self.centre)
         self.world_coord = (size + barrier) // 2
@@ -49,7 +55,7 @@ class EventHandler:
 
     def init_world(self):
         self.generation(200)
-        self.screen_world = World(self.screen, self.centre, [self.world_coord, self.world_coord], self.matr)
+        self.screen_world = World(self.screen, self.centre, [self.world_coord, self.world_coord], self.matr, self)
         self.screen_world.create()
 
     def machine(self):
@@ -64,21 +70,31 @@ class EventHandler:
 
     def go_back_to_menu(self):
         self.close(['pause', True, None])
-        self.show_menu()
+        self.show_menu(self.centre)
         self.screen_world = None
 
-    def show_menu(self):
-        menu = Interfaces.Menu(self.centre, self.textures)
+    def show_menu(self, centre):
+        menu = Interfaces.Menu(centre, self.textures)
         menu.button_start.connect(self.close, 'menu', False, self.init_world)
         menu.button_exit.connect(sys.exit)
         self.interfaces['menu'] = menu.create_surface()
 
-    def show_pause(self):
-        pause = Interfaces.Pause(self.centre, self.textures)
+    def place_structure(self, data=[None]):
+        data[0].structure = ClassicStructure(self.textures.animations_structures['mill'][0], (data[0].rect[0] + data[0].rect[2] // 2, data[0].rect[1] + data[0].rect[3] // 2), 'mill', self.textures)
+        data[0].biom[1] = 'mill'
+
+    def show_pause(self, centre):
+        pause = Interfaces.Pause(centre, self.textures)
         pause.button_menu.connect(self.go_back_to_menu)
         self.interfaces['pause'] = pause.create_surface()
 
+    def show_popup_menu(self, centre, ground=None):
+        popup = Interfaces.PopupMenu(centre, self.textures)
+        popup.button_build.connect(self.place_structure, ground)
+        self.interfaces['popup_menu'] = popup.create_surface()
+
     def update(self):
+        self.screen.fill((233, 217, 202))
         self.clock.tick()
         c = None
         for i in pygame.event.get():
@@ -86,7 +102,9 @@ class EventHandler:
             if i.type == pygame.KEYDOWN:
                 c = i
                 if i.key == pygame.K_ESCAPE and not self.open_some:
-                    self.show_pause() if 'pause' not in self.interfaces else self.close(['pause', False, None])
+                    self.show_pause(self.centre) if 'pause' not in self.interfaces else self.close(['pause', False, None])
+                if 'popup_menu' in self.interfaces:
+                    self.interfaces.pop('popup_menu')
             if i.type == pygame.QUIT:
                 sys.exit()
         if self.screen_world:
@@ -103,7 +121,7 @@ class EventHandler:
 if __name__ == '__main__':
     pygame.init()
     handler = EventHandler()
-    handler.show_menu()
+    handler.show_menu(handler.centre)
     while True:
         handler.update()
         pygame.display.flip()
