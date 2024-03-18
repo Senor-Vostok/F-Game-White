@@ -1,4 +1,3 @@
-import pygame
 import Player
 import Interfaces
 from Textures import Textures
@@ -6,11 +5,8 @@ from Machine import World
 from Generation import Generation
 from Cam_class import Cam
 import sys
-import os
 from win32api import GetSystemMetrics
 from Structures import *
-
-import Widgets
 
 
 class EventHandler:
@@ -40,7 +36,7 @@ class EventHandler:
         if self.camera.i[3] == 3:
             if 'popup_menu' in self.interfaces:
                 self.interfaces.pop('popup_menu')
-            self.show_popup_menu((self.camera.i[0], self.camera.i[1]), ground)
+            self.show_popup_menu((ground.rect[0] + ground.rect[2], ground.rect[1] + ground.rect[3]), ground)
 
     def generation(self, size=200, barrier=20):
         gen = Generation(size, self.screen, self.centre)
@@ -51,7 +47,7 @@ class EventHandler:
     def player(self, id):
         self.player = Player.Player(id)
         self.player.start_point = (self.screen_world.sq2 // 2, self.screen_world.sq1 // 2)
-        player.setup(self.screen_world.great_world[self.player.start_point[0]][self.player.start_point[1]])
+        self.player.setup(self.screen_world.great_world[self.player.start_point[0]][self.player.start_point[1]])
 
     def init_world(self):
         self.generation(200)
@@ -63,7 +59,7 @@ class EventHandler:
         self.camera.speed = self.camera.const_for_speed / (self.clock.get_fps() + 1)
         self.screen_world.draw(self.camera.i, self.camera.move, self.open_some)  # Вырисовываем картинку
 
-    def close(self, data=['menu', False, init_world]):
+    def close(self, data):
         self.open_some = data[1]
         self.interfaces.pop(data[0])
         if data[2]: data[2]()
@@ -79,7 +75,7 @@ class EventHandler:
         menu.button_exit.connect(sys.exit)
         self.interfaces['menu'] = menu.create_surface()
 
-    def place_structure(self, data=[None]):
+    def place_structure(self, data):
         data[0].structure = ClassicStructure(self.textures.animations_structures['mill'][0], (data[0].rect[0] + data[0].rect[2] // 2, data[0].rect[1] + data[0].rect[3] // 2), 'mill', self.textures)
         data[0].biom[1] = 'mill'
 
